@@ -1,0 +1,39 @@
+.hidden {
+  display: none;
+}
+
+.inactive {
+  cursor: default !important;
+}
+
+#recordButton {
+  cursor: pointer;
+}
+
+.button-animate {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 3px 1px #7eda88;
+  }
+
+  100% {
+    box-shadow: 0px 0px 3px 10px #7eda88;
+
+  }
+}
+
+#stopButton {
+  cursor: pointer;
+}
+
+audio::-webkit-media-controls-panel,
+video::-webkit-media-controls-panel {
+  background-color: #fff;
+}
+
+#downloadContainer {
+  cursor: pointer;
+}
