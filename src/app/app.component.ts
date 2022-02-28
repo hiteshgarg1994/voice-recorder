@@ -70,10 +70,9 @@ export class AppComponent implements OnInit {
       this.stopButton.disabled = false;
     }
 
-    if (this.preview && !this.preview.classList.contains("hidden")) {
-      this.preview.classList.add("hidden");
-    }
-
+    // if (this.preview && !this.preview.classList.contains("hidden")) {
+    //   this.preview.classList.add("hidden");
+    // }
 
     if (this.downloadContainer && !this.downloadContainer.classList.contains("hidden")) {
       this.downloadContainer.classList.add("hidden");
