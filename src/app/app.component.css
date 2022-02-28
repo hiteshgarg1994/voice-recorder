@@ -55,9 +55,7 @@ padding: 1.5rem;
 }
 
 .wrapper .page-content-wrapper {
-
   margin-left: 0px;
-  margin-top: 65px;
   padding-bottom: 20px;
   transition: .3s all;
 
@@ -342,7 +340,7 @@ margin-bottom: .5rem
 
 label {
 display: inline-block
-}	
+}
 
 .input-group {
 position: relative;
@@ -585,4 +583,8 @@ content: "\e944"
 
 .bxl-twitter:before {
 content: "\e979"
+}
+
+div[hidden] {
+  display: none !important;
 }

@@ -1,5 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {FormGroup, FormControl} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -13,30 +15,33 @@ export class AppComponent implements OnInit {
   private downloadAudio: HTMLAnchorElement | undefined;
   private downloadContainer: HTMLElement | null | undefined;
   private preview: HTMLAudioElement | undefined;
-  private stopButton: HTMLInputElement | undefined;
+  private base: string = "http://localhost:3000/voice-recorder/";
   public fileName: string = "";
-  public link: string = "http://localhost:3000/voice-recorder/";
+  public link: string = "";
+  public stopVisible: boolean = false;
+  public audioDesciptionForm: FormGroup = new FormGroup({});
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.loadAudioRecorder();
+    this.initAudioDescriptionForm();
+  }
+
+  initAudioDescriptionForm = (): void => {
+    this.audioDesciptionForm =
+      this.fb.group({
+        title: ['Untitled'],
+        description: ['Sample Audio']
+      });
   }
 
   loadAudioRecorder = () => {
     this.recordButton = <HTMLInputElement>document.getElementById("recordButton");
-    this.stopButton = <HTMLInputElement>document.getElementById("stopButton");
-    this.stopButton.disabled = true;
     this.preview = <HTMLAudioElement>document.getElementById("audio-playback");
     this.downloadAudio = <HTMLAnchorElement>document.getElementById("downloadButton");
     this.downloadContainer = document.getElementById("downloadContainer");
-  }
-
-  downloadRecording = () => {
-    const name = new Date();
-    const res = name.toISOString().slice(0, 10);
-    this.downloadAudio && (this.downloadAudio.download = res + '.mp3');
   }
 
   stopRecording = () => {
@@ -49,30 +54,19 @@ export class AppComponent implements OnInit {
       this.recordButton.classList.remove("button-animate");
     }
 
-    if (this.stopButton) {
-      this.stopButton.classList.add("inactive")
-      this.stopButton["disabled"] = true;
-    }
     this.preview && this.preview.classList.remove("hidden");
     this.downloadContainer && this.downloadContainer.classList.remove("hidden");
+    this.stopVisible = false;
   }
 
   startRecording = () => {
     this.fileName = "";
+    this.stopVisible = true;
     if (this.recordButton) {
       this.recordButton.disabled = true;
       this.recordButton.innerText = "Recording...";
       this.recordButton.classList.add("button-animate");
     }
-
-    if (this.stopButton) {
-      this.stopButton.classList.remove("inactive");
-      this.stopButton.disabled = false;
-    }
-
-    // if (this.preview && !this.preview.classList.contains("hidden")) {
-    //   this.preview.classList.add("hidden");
-    // }
 
     if (this.downloadContainer && !this.downloadContainer.classList.contains("hidden")) {
       this.downloadContainer.classList.add("hidden");
@@ -127,17 +121,13 @@ export class AppComponent implements OnInit {
         if (response.ResponseCode == 200) {
           console.log('response received is ', response);
           this.fileName = response.data.fileName;
-          this.link += this.fileName;
+          this.link = this.base + this.fileName;
         } else {
           alert(response.exceptionMessage);
         }
         this.cd.detectChanges();
       })
     return;
-  }
-
-  shareAudio = (): void => {
-
   }
 
   copyToClipboard = () => {
@@ -148,5 +138,9 @@ export class AppComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(el);
   };
+
+  onSubmit = (): void => {
+
+  }
 
 }

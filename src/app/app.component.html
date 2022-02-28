@@ -1,190 +1,102 @@
- <!--
-<div class="audio-record">
-  <button id="recordButton" (click)="startRecording()">Start Recording</button>
-  <button id="stopButton" (click)="stopRecording()" class="inactive">Stop</button>
-</div>
-
-<div class="playback">
-  <audio src="" controls id="audio-playback" class="hidden"></audio>
-</div>
-
-<div class="download">
-  <button class="hidden" id="downloadContainer">
-    <a href="" download="" id="downloadButton" (click)="downloadRecording()">Download Audio</a>
-  </button>
-</div>
-
-<div class="share" *ngIf="fileName">
-  <button id="share" (click)="shareAudio()" class="inactive">Share</button>
-  <ul>
-    <li><a target="_blank" [href]="'https://www.facebook.com/sharer/sharer.php?u=' + link">Share on Facebook</a></li>
-    <li><a target="_blank" [href]="'https://twitter.com/intent/tweet?url=' + link">Share on Twitter</a></li>
-    <li><a target="_blank" [href]="'https://www.linkedin.com/sharing/share-offsite/&url=' + link">Share on LinkedIn</a></li>
-    <li><a target="_blank" [href]="'whatsapp://send?text=' + link" data-action="share/whatsapp/share">Share on Whatsapp</a>
-    </li>
-    <li><a href="javascript:void(0)" (click)="copyToClipboard()">Copy to clipboard</a>
-    </li>
-  </ul>
-</div>
-
--->
-    
-
- <!--start wrapper-->
- <div class="wrapper">
-
-
-
-  <!-- start page content wrapper-->
+<div class="wrapper">
   <div class="page-content-wrapper">
-    <!-- start page content-->
-   <div class="page-content">
-
-    
-       
-<div class="row">
-      <div class="col-12 col-lg-12 mx-auto">
-        <div class="card radius-10">
-          <div class="card-body text-center">
-            <h1 class="display-4 mt-5">Audio recorder</h1>
-            <p>Click on the “Start Recording” button to record a quick audio.</p>
-<div>	<a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" id="recordButton" (click)="startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">Start Recording</a>
-                  <a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" id="stopButton" (click)="stopRecording()" class="btn btn-lg btn-outline-dark ms-3 px-md-5 radius-30">Stop</a>
-<a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" id="downloadButton" (click)="downloadRecording()" class="btn btn-lg btn-outline-dark ms-3 px-md-5 radius-30">Download</a>
+    <div class="page-content">
+      <div class="row">
+        <div class="col-12 col-lg-12 mx-auto">
+          <div class="card radius-10">
+            <div class="card-body text-center">
+              <h1 class="display-4 mt-5">Audio Recorder</h1>
+              <p>Click on the “Start Recording” button to record a quick audio.</p>
+              <div><a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;"
+                      id="recordButton" (click)="startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">Start
+                Recording</a>
+                <a *ngIf="stopVisible"
+                   style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" id="stopButton"
+                   (click)="stopRecording()" class="btn btn-lg btn-outline-dark ms-3 px-md-5 radius-30">Stop</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [hidden]="!fileName" class="card radius-10">
+        <div style="margin-top: 1.5rem!important;" class="row g-0">
+          <div class="col-xl-7">
+            <audio controls id="audio-playback">
+              Your browser does not support the audio element.
+            </audio>
+            <label class="form-label">Copy URL and Share it with your clients or colleagues</label>
+            <div class="input-group input-group-lg">
+              <input [(ngModel)]="link" style="font-size: 1rem !important;" type="text" class="form-control"
+                     placeholder="Your Audio URL will be visible here" disabled>
+              <button (click)="copyToClipboard()" class="btn btn-primary" type="button"><i
+                class="fadeIn animated bx bx-copy">
+              </i>
+              </button>
+            </div>
+            <div style="margin-top:20px !important;margin-bottom:40px;" class="error-social mt-3 d-flex gap-2">
+              <a target="_blank" [href]="'https://www.facebook.com/sharer/sharer.php?u=' + link" class="bg-facebook"><i
+                class="bx bxl-facebook"></i></a>
+              <a target="_blank" [href]="'https://twitter.com/intent/tweet?url=' + link" class="bg-twitter"><i
+                class="bx bxl-twitter"></i></a>
+              <a class="bg-google"><i class="bx bxl-google"></i></a>
+              <a target="_blank" [href]="'https://www.linkedin.com/sharing/share-offsite/&url=' + link"
+                 class="bg-linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="col-xl-5">
+            <form [formGroup]="audioDesciptionForm" (ngSubmit)="onSubmit()">
+              <div style="padding-left: 40px;">
+                <div style="padding-right: 40px; padding-bottom: 40px;">
+                  <h5>Setup the audio URL</h5>
+                  <div class="mb-3">
+                    <label class="form-label">Audio title</label>
+                    <input formControlName="title" type="text" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Message for listener</label>
+                    <textarea formControlName="description" class="form-control" rows="1"></textarea>
+                  </div>
+                  <a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;"
+                     class="btn btn-lg btn-primary px-md-5 radius-30">Update</a>
                 </div>
-                <!--
-<audio controls id="audio-playback" class="hidden">
-Your browser does not support the audio element.
-</audio>
--->  
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-             
-
-        <div *ngIf="fileName" class="card radius-10">
-          <div style="margin-top: 1.5rem!important;" class="row g-0">
-
-            <div class="col-xl-7">
-           
-              <audio controls id="audio-playback">
-                Your browser does not support the audio element.
-                </audio>
-
-
-                <label class="form-label">Copy URL and Share it with your clients or colleagues</label>
-                <form>
-                  <div class="input-group input-group-lg">
-                    <input style="font-size: 1rem !important;" type="text" class="form-control" placeholder="Your Audio URL will be visible here" disabled>
-                    <button href="javascript:void(0)" (click)="copyToClipboard()" class="btn btn-primary" type="button"><i class="fadeIn animated bx bx-copy">
-                      </i>
-                    </button>
-                  </div>
-                </form>
-                
-            <div style="margin-top:20px !important;margin-bottom:40px;" class="error-social mt-3 d-flex gap-2"> 
-                  <a target="_blank" [href]="'https://www.facebook.com/sharer/sharer.php?u=' + link" class="bg-facebook"><i class="bx bxl-facebook"></i></a>
-                  <a target="_blank" [href]="'https://twitter.com/intent/tweet?url=' + link" class="bg-twitter"><i class="bx bxl-twitter"></i></a>
-                  <a href="javascript:;" class="bg-google"><i class="bx bxl-google"></i></a>
-                  <a target="_blank" [href]="'https://www.linkedin.com/sharing/share-offsite/&url=' + link" class="bg-linkedin"><i class="bx bxl-linkedin"></i></a>
-                </div>
-
-       <!--
-              <form style="margin-left:40px;margin-right:40px;">
-                      <div class="input-group input-group-lg">
-                        <input style="font-size: 1rem !important;" type="text" class="form-control" placeholder="Your Audio URL will be visible here">
-                        <button href="javascript:void(0)" (click)="copyToClipboard()" class="btn btn-primary" type="button"><i class="fadeIn animated bx bx-copy">
-                          </i>
-                        </button>
-                      </div>
-                    </form>
-                <div *ngIf="fileName" style="margin-top:40px !important;margin-bottom:40px;" class="error-social mt-3 d-flex align-items-center justify-content-center gap-2"> 
-                      <a target="_blank" [href]="'https://www.facebook.com/sharer/sharer.php?u=' + link" class="bg-facebook"><i class="bx bxl-facebook"></i></a>
-                      <a target="_blank" [href]="'https://twitter.com/intent/tweet?url=' + link" class="bg-twitter"><i class="bx bxl-twitter"></i></a>
-                      <a href="javascript:;" class="bg-google"><i class="bx bxl-google"></i></a>
-                      <a target="_blank" [href]="'https://www.linkedin.com/sharing/share-offsite/&url=' + link" class="bg-linkedin"><i class="bx bxl-linkedin"></i></a>
-                    </div>
-                      
-                    <div class="share" *ngIf="fileName">
-                  
-                      <button id="share" (click)="shareAudio()" class="inactive">Share</button>
-                      <ul>
-                        <li><a target="_blank" [href]="'https://www.facebook.com/sharer/sharer.php?u=' + link">Share on Facebook</a></li>
-                        <li><a target="_blank" [href]="'https://twitter.com/intent/tweet?url=' + link">Share on Twitter</a></li>
-                        <li><a target="_blank" [href]="'https://www.linkedin.com/sharing/share-offsite/&url=' + link">Share on LinkedIn</a></li>
-                        <li><a target="_blank" [href]="'whatsapp://send?text=' + link" data-action="share/whatsapp/share">Share on Whatsapp</a>
-                        </li>
-                        <li><a href="javascript:void(0)" (click)="copyToClipboard()">Copy to clipboard</a>
-                        </li>
-                      </ul>
-                    </div>
-    -->
-                </div>
-
-            <div class="col-xl-5">
-              <div style="padding-left: 40px;">
-                <div style="padding-right: 40px; padding-bottom: 40px;">
-                          <h5>Setup the audio URL</h5>
-                          <div class="mb-3">
-                            <label class="form-label">Audio title</label>
-                            <input type="text" class="form-control">
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Message for listener</label>
-                            <textarea class="form-control" rows="1"></textarea>
-                          </div>
-                          <a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" class="btn btn-lg btn-primary px-md-5 radius-30">Update</a>
-                        </div>
-              </div>
+    <div style="margin: 30px auto; width: 80%; background-color: #ffffff; border-radius: 10px;">
+      <div class="card radius-10">
+        <div class="row g-0">
+          <div class="col-xl-12" style="padding: 40px !important;">
+            <H1>How to use:</H1>
+            <div class="step-1A">
+              <h4>Step 1 &#45; Press the Record Button</h4>
+              <p>Click on the "Start Recording" button.</p>
+            </div>
+            <div class="step-2A">
+              <h4>Step 2 &#45; Allow Microphone Access &amp; Start Talking</h4>
+              <p>A popup will appear, asking you permission for our website to access your microphone. Click on "Allow"
+                to start recording. Speak clearly into your microphone for up to 5 minutes.</p>
+            </div>
+            <div class="step-3A">
+              <h4>Step 3 &#45; Stop Recording</h4>
+              <p>Recording will automatically stop when you reach the duration limit, or you can stop it anytime by
+                clicking on the "Stop" button.</p>
+            </div>
+            <div class="step-4A">
+              <h4>Step 4 &#45; Preview your Recording or Try Again</h4>
+              <p>Once you finish recording, an audio player will appear. Press the play button to preview your
+                recording, or click "Redo Recording" to try again.</p>
+            </div>
+            <div class="step-5A">
+              <h4>Step 5 &#45; Share Your Audio Recording</h4>
+              <p>If you are happy with your final recording, share your audio URL.</p>
             </div>
           </div>
-          <!--end row-->
         </div>
-    
-
+      </div>
     </div>
-
-
-
-<div style="margin: 30px auto; width: 80%; background-color: #ffffff; border-radius: 10px;">
-<div class="card radius-10">
-          <div class="row g-0">
-            <div class="col-xl-12" style="padding: 40px !important;">
-   
-<div class="step-1A">
-  <h4>Step 1 &#45; Press the Record Button</h4>
-  <p>Click on the "Start Recording" button.</p>
+  </div>
 </div>
-
-<div class="step-2A">
-  <h4>Step 2 &#45; Allow Microphone Access &amp; Start Talking</h4>
-  <p>A popup will appear, asking you permission for our website to access your microphone. Click on "Allow" to start recording. Speak clearly into your microphone for up to 5 minutes.</p>
-</div>
-
-<div class="step-3A">
-  <h4>Step 3 &#45; Stop Recording</h4>
-  <p>Recording will automatically stop when you reach the duration limit, or you can stop it anytime by clicking on the "Stop" button.</p>
-</div>
-
-<div class="step-4A">
-  <h4>Step 4 &#45; Preview your Recording or Try Again</h4>
-  <p>Once you finish recording, an audio player will appear. Press the play button to preview your recording, or click "Redo Recording" to try again.</p>
-</div>
-
-<div class="step-5A">
-  <h4>Step 5 &#45; Download or Share Your Audio Recording</h4>
-  <p>If you are happy with your final recording, download or share your audio URL.</p>
-</div>
-</div>
-</div>
-                  
-            </div>
-          </div>
-
-    <!-- end page content-->
-   </div>
-   
-</div>
-<!--end wrapper-->
 
