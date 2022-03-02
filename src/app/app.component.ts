@@ -1,7 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {FormBuilder} from '@angular/forms';
+import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {InfoDialogComponent} from "./info-dialog/info-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -11,17 +13,15 @@ import {FormBuilder} from '@angular/forms';
 export class AppComponent implements OnInit {
   private recorder: MediaRecorder | undefined;
   private audio_stream: MediaStream | undefined;
-  private recordButton: HTMLInputElement | undefined;
-  private downloadAudio: HTMLAnchorElement | undefined;
-  private downloadContainer: HTMLElement | null | undefined;
   private preview: HTMLAudioElement | undefined;
   private base: string = "http://localhost:3000/voice-recorder/";
   public fileName: string = "";
   public link: string = "";
   public stopVisible: boolean = false;
   public audioDesciptionForm: FormGroup = new FormGroup({});
+  public recordButtonText = "Start Recording";
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private fb: FormBuilder, private matDialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -38,39 +38,20 @@ export class AppComponent implements OnInit {
   }
 
   loadAudioRecorder = () => {
-    this.recordButton = <HTMLInputElement>document.getElementById("recordButton");
     this.preview = <HTMLAudioElement>document.getElementById("audio-playback");
-    this.downloadAudio = <HTMLAnchorElement>document.getElementById("downloadButton");
-    this.downloadContainer = document.getElementById("downloadContainer");
   }
 
   stopRecording = () => {
     this.recorder && this.recorder.stop();
     this.audio_stream && this.audio_stream.getAudioTracks()[0].stop();
-
-    if (this.recordButton) {
-      this.recordButton["disabled"] = false;
-      this.recordButton.innerText = "Redo Recording";
-      this.recordButton.classList.remove("button-animate");
-    }
-
-    this.preview && this.preview.classList.remove("hidden");
-    this.downloadContainer && this.downloadContainer.classList.remove("hidden");
+    this.recordButtonText = "Redo Recording";
     this.stopVisible = false;
   }
 
   startRecording = () => {
     this.fileName = "";
     this.stopVisible = true;
-    if (this.recordButton) {
-      this.recordButton.disabled = true;
-      this.recordButton.innerText = "Recording...";
-      this.recordButton.classList.add("button-animate");
-    }
-
-    if (this.downloadContainer && !this.downloadContainer.classList.contains("hidden")) {
-      this.downloadContainer.classList.add("hidden");
-    }
+    this.recordButtonText = "Recording...";
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia != undefined) {
       this.initMediaDevices();
     } else {
@@ -85,15 +66,14 @@ export class AppComponent implements OnInit {
         this.recorder = new MediaRecorder(stream);
         let chunks: BlobPart[] | undefined = [];
         this.recorder.ondataavailable = e => {
-          console.log("data available", e);
           chunks && chunks.push(e.data);
         };
         this.recorder.onstop = ev => {
           const blob = new Blob(chunks, {'type': 'audio/mp3'});
           const url = URL.createObjectURL(blob);
           this.preview && (this.preview.src = url);
-          this.downloadAudio && (this.downloadAudio.href = url);
-          console.log("recorder stopped");
+          this.preview?.pause();
+          this.preview?.load();
           this.uploadAudio(blob);
         }
         this.recorder.start();
@@ -119,7 +99,6 @@ export class AppComponent implements OnInit {
     this.http.post('http://localhost:3000/voice-recorder', fd)
       .subscribe((response: any) => {
         if (response.ResponseCode == 200) {
-          console.log('response received is ', response);
           this.fileName = response.data.fileName;
           this.link = this.base + this.fileName;
         } else {
@@ -141,6 +120,11 @@ export class AppComponent implements OnInit {
 
   onSubmit = (): void => {
 
+  }
+
+  openDialog = ():void => {
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(InfoDialogComponent, dialogConfig);
   }
 
 }

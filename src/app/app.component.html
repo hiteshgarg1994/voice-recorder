@@ -6,10 +6,12 @@
           <div class="card radius-10">
             <div class="card-body text-center">
               <h1 class="display-4 mt-5">Audio Recorder</h1>
-              <p>Click on the “Start Recording” button to record a quick audio.</p>
-              <div><a style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;"
-                      id="recordButton" (click)="startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">Start
-                Recording</a>
+              <p>Click on the “Start Recording” button to record a quick audio. <i style="cursor: pointer" (click)="openDialog()" class="fa fa-info-circle" aria-hidden="true"></i></p>
+              <div><a [class.button-animate]="stopVisible"
+                      style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;"
+                      id="recordButton" (click)="startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">
+                <i *ngIf="stopVisible" class="fa fa-circle text-danger Blink"></i> {{recordButtonText}}
+              </a>
                 <a *ngIf="stopVisible"
                    style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;" id="stopButton"
                    (click)="stopRecording()" class="btn btn-lg btn-outline-dark ms-3 px-md-5 radius-30">Stop</a>
@@ -21,9 +23,11 @@
       <div [hidden]="!fileName" class="card radius-10">
         <div style="margin: 1.5rem!important;" class="row g-0">
           <div class="col-xl-7">
-            <audio controls id="audio-playback">
+            <audio controls id="audio-playback" controlsList="nodownload" preload="metadata">
               Your browser does not support the audio element.
             </audio>
+            <canvas id="my-canvas" width="300" height="20">
+            </canvas>
             <label class="form-label">Copy URL and Share it with your clients or colleagues</label>
             <div class="input-group input-group-lg">
               <input [(ngModel)]="link" style="font-size: 1rem !important;" type="text" class="form-control"
@@ -60,38 +64,6 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="margin: 30px auto; width: 80%; background-color: #ffffff; border-radius: 10px;">
-      <div class="card radius-10">
-        <div class="row g-0">
-          <div class="col-xl-12" style="padding: 40px !important;">
-            <H1 class="heading-steps">How to use:</H1>
-            <div class="step-1A">
-              <h4>Step 1 &#45; Press the Record Button</h4>
-              <p>Click on the "Start Recording" button.</p>
-            </div>
-            <div class="step-2A">
-              <h4>Step 2 &#45; Allow Microphone Access &amp; Start Talking</h4>
-              <p>A popup will appear, asking you permission for our website to access your microphone. Click on "Allow"
-                to start recording. Speak clearly into your microphone for up to 5 minutes.</p>
-            </div>
-            <div class="step-3A">
-              <h4>Step 3 &#45; Stop Recording</h4>
-              <p>Recording will automatically stop when you reach the duration limit, or you can stop it anytime by
-                clicking on the "Stop" button.</p>
-            </div>
-            <div class="step-4A">
-              <h4>Step 4 &#45; Preview your Recording or Try Again</h4>
-              <p>Once you finish recording, an audio player will appear. Press the play button to preview your
-                recording, or click "Redo Recording" to try again.</p>
-            </div>
-            <div class="step-5A">
-              <h4>Step 5 &#45; Share Your Audio Recording</h4>
-              <p>If you are happy with your final recording, share your audio URL.</p>
-            </div>
           </div>
         </div>
       </div>
