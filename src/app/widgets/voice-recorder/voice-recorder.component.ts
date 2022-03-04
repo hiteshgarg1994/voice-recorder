@@ -1,8 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {InfoDialogComponent} from "../../info-dialog/info-dialog.component";
+import {environment} from "../../../environments/environment";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-voice-recorder',
@@ -11,17 +13,20 @@ import {InfoDialogComponent} from "../../info-dialog/info-dialog.component";
 })
 
 export class VoiceRecorderComponent implements OnInit {
+  @Output() busyEvent = new EventEmitter<Subscription>();
   private recorder: MediaRecorder | undefined;
   private audio_stream: MediaStream | undefined;
   private preview: HTMLAudioElement | undefined;
-  private base: string = "http://localhost:3000/voice-recorder/";
   public fileName: string = "";
   public link: string = "";
   public stopVisible: boolean = false;
   public audioDesciptionForm: FormGroup = new FormGroup({});
   public recordButtonText = "Start Recording";
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef, private fb: FormBuilder, private matDialog: MatDialog) {
+  constructor(private http: HttpClient,
+              private cd: ChangeDetectorRef,
+              private fb: FormBuilder,
+              private matDialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -95,17 +100,17 @@ export class VoiceRecorderComponent implements OnInit {
     }
     const fd = new FormData();
     fd.append("audioData", blob);
-
-    this.http.post('http://localhost:3000/voice-recorder', fd)
+    this.busyEvent.emit(this.http.post(environment.voiceApi, fd)
       .subscribe((response: any) => {
         if (response.ResponseCode == 200) {
           this.fileName = response.data.fileName;
-          this.link = this.base + this.fileName;
+          const base = environment.production ? window.location.origin : environment.apiUrl;
+          this.link = base + environment.voiceApi + this.fileName;
         } else {
           alert(response.exceptionMessage);
         }
         this.cd.detectChanges();
-      })
+      }));
     return;
   }
 
@@ -122,7 +127,7 @@ export class VoiceRecorderComponent implements OnInit {
 
   }
 
-  openDialog = ():void => {
+  openDialog = (): void => {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(InfoDialogComponent, dialogConfig);
   }

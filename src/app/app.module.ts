@@ -5,13 +5,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InfoDialogComponent } from './info-dialog/info-dialog.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { VoiceRecorderComponent } from './widgets/voice-recorder/voice-recorder.component';
-import { QrCodeComponent } from './widgets/qr-code/qr-code.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InfoDialogComponent} from './info-dialog/info-dialog.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {VoiceRecorderComponent} from './widgets/voice-recorder/voice-recorder.component';
+import {QrCodeComponent} from './widgets/qr-code/qr-code.component';
 import {NotFoundComponent} from "./layouts/notFound.component";
+import {publicComponent} from "./layouts/public/public-component";
+import {secureComponent} from "./layouts/secure/secure-component";
+import {NgBusyModule} from 'ng-busy';
 
 @NgModule({
   declarations: [
@@ -20,18 +23,21 @@ import {NotFoundComponent} from "./layouts/notFound.component";
     DashboardComponent,
     VoiceRecorderComponent,
     QrCodeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    publicComponent,
+    secureComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule,
-        BrowserAnimationsModule,
-        MatDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    NgBusyModule
+  ],
   providers: [],
   entryComponents: [InfoDialogComponent],
   bootstrap: [AppComponent]
