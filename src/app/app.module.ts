@@ -8,11 +8,19 @@ import {CommonModule} from "@angular/common";
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { VoiceRecorderComponent } from './widgets/voice-recorder/voice-recorder.component';
+import { QrCodeComponent } from './widgets/qr-code/qr-code.component';
+import {NotFoundComponent} from "./layouts/notFound.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    DashboardComponent,
+    VoiceRecorderComponent,
+    QrCodeComponent,
+    NotFoundComponent
   ],
     imports: [
         BrowserModule,
