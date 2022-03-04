@@ -1,0 +1,78 @@
+<div [hidden]="!error"><span>{{error}}</span></div>
+<div class="wrapper" [hidden]="error">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent p-3">
+      <div class="container-fluid">
+        <a><img src="/assets/images/logo-icon-3.png" width="140" alt=""/></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">BiteApps</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;">Pricing</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <a href="javascript:;" class="btn btn-sm btn-primary px-4 radius-30">Join now</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <div style=" height: 33rem;  margin: auto; display: flex; align-items: center;  justify-content: center;"
+         class="row">
+      <div class="col-12 col-lg-12 mx-auto">
+        <div class="card radius-10">
+          <div class="card-body p-4">
+
+            <audio id="audio-playback" controlsList="nodownload" preload="metadata"
+                   style="display: flex; align-items: center;  justify-content: center; margin: auto;" controls>
+              Your browser does not support the audio element.
+            </audio>
+            <div class="front-page-info">
+              <h4>Untitled</h4>
+              <p>Sample Audio </p>
+            </div>
+            <div class="col-12 col-lg-12">
+              <div class="position-relative border-bottom my-3">
+                <div class="position-absolute seperator translate-middle-y"></div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-12">
+              <div class="d-grid">
+                <button type="button" class="btn btn-primary radius-10">Record And Share An Audio Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="my-5">
+    <div class="container">
+
+      <div class="text-center">
+        <p class="my-4">Copyright © 2021 BiteApps.co.</p>
+      </div>
+    </div>
+  </footer>
+</div>

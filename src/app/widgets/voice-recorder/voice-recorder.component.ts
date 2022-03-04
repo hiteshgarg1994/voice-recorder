@@ -104,8 +104,8 @@ export class VoiceRecorderComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.ResponseCode == 200) {
           this.fileName = response.data.fileName;
-          const base = environment.production ? window.location.origin : environment.apiUrl;
-          this.link = base + environment.voiceApi + this.fileName;
+          const base = window.location.origin;
+          this.link = base + '/' + 'view-voice/' + this.fileName;
         } else {
           alert(response.exceptionMessage);
         }

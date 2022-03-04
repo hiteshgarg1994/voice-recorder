@@ -15,6 +15,7 @@ import {NotFoundComponent} from "./layouts/notFound.component";
 import {publicComponent} from "./layouts/public/public-component";
 import {secureComponent} from "./layouts/secure/secure-component";
 import {NgBusyModule} from 'ng-busy';
+import { ViewVoiceComponent } from './widgets/voice-recorder/view-voice/view-voice.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {NgBusyModule} from 'ng-busy';
     QrCodeComponent,
     NotFoundComponent,
     publicComponent,
-    secureComponent
+    secureComponent,
+    ViewVoiceComponent
   ],
   imports: [
     BrowserModule,
