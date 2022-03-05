@@ -9,7 +9,7 @@
               <p>Click on the “Start Recording” button to record a quick audio. <i style="cursor: pointer" (click)="openDialog()" class="fa fa-info-circle" aria-hidden="true"></i></p>
               <div><a [class.button-animate]="stopVisible"
                       style="padding-right: 2rem!important; padding-left: 2rem!important; font-size:1rem;"
-                      id="recordButton" (click)="startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">
+                      id="recordButton" (click)="stopVisible ? '' : startRecording()" class="btn btn-lg btn-primary px-md-5 radius-30">
                 <i *ngIf="stopVisible" class="fa fa-circle text-danger Blink"></i> {{recordButtonText}}
               </a>
                 <a *ngIf="stopVisible"

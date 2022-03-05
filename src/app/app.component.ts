@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,4 @@ import {Subscription} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-  busy: Subscription;
 }

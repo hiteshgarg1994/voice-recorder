@@ -1,10 +1,10 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {InfoDialogComponent} from "../../info-dialog/info-dialog.component";
 import {environment} from "../../../environments/environment";
-import {Subscription} from "rxjs";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-voice-recorder',
@@ -13,7 +13,6 @@ import {Subscription} from "rxjs";
 })
 
 export class VoiceRecorderComponent implements OnInit {
-  @Output() busyEvent = new EventEmitter<Subscription>();
   private recorder: MediaRecorder | undefined;
   private audio_stream: MediaStream | undefined;
   private preview: HTMLAudioElement | undefined;
@@ -26,7 +25,8 @@ export class VoiceRecorderComponent implements OnInit {
   constructor(private http: HttpClient,
               private cd: ChangeDetectorRef,
               private fb: FormBuilder,
-              private matDialog: MatDialog) {
+              private matDialog: MatDialog,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -54,6 +54,7 @@ export class VoiceRecorderComponent implements OnInit {
   }
 
   startRecording = () => {
+    this.preview && (this.preview.src = '');
     this.fileName = "";
     this.stopVisible = true;
     this.recordButtonText = "Recording...";
@@ -100,18 +101,20 @@ export class VoiceRecorderComponent implements OnInit {
     }
     const fd = new FormData();
     fd.append("audioData", blob);
-    this.busyEvent.emit(this.http.post(environment.voiceApi, fd)
+    this.spinner.show();
+    this.http.post(environment.voiceApi, fd)
       .subscribe((response: any) => {
         if (response.ResponseCode == 200) {
           this.fileName = response.data.fileName;
           const base = window.location.origin;
           this.link = base + '/' + 'view-voice/' + this.fileName;
+          this.cd.detectChanges();
         } else {
           alert(response.exceptionMessage);
         }
-        this.cd.detectChanges();
-      }));
-    return;
+        this.spinner.hide();
+      });
+    this.cd.detectChanges();
   }
 
   copyToClipboard = () => {

@@ -14,7 +14,7 @@ import {QrCodeComponent} from './widgets/qr-code/qr-code.component';
 import {NotFoundComponent} from "./layouts/notFound.component";
 import {publicComponent} from "./layouts/public/public-component";
 import {secureComponent} from "./layouts/secure/secure-component";
-import {NgBusyModule} from 'ng-busy';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ViewVoiceComponent } from './widgets/voice-recorder/view-voice/view-voice.component';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { ViewVoiceComponent } from './widgets/voice-recorder/view-voice/view-voi
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgBusyModule
+    NgxSpinnerModule
   ],
   providers: [],
   entryComponents: [InfoDialogComponent],

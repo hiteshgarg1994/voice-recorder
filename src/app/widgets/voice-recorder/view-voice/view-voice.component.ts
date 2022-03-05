@@ -24,10 +24,14 @@ export class ViewVoiceComponent implements OnInit {
   getFileFromAPI = (fileName: string): void => {
     this.http.get(environment.voiceApi + fileName, {responseType: 'blob'})
       .subscribe((response: any) => {
+        if (response.type.indexOf('audio') > -1) {
           const url = window.URL.createObjectURL(response)
           this.preview && (this.preview.src = url);
           this.preview?.pause();
           this.preview?.load();
+        } else {
+          this.error = "Something Went Wrong !!!"
+        }
       })
   }
 
