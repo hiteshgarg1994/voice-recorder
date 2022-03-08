@@ -1,1 +1,20 @@
-dashboard works
+<!-- Tool Cards Start -->
+
+<div class="tool-row-cols-xxl-4">
+  <div class="tool-col">
+    <div *ngFor="let widget of widgets" class="tool-card" (click)="widgetClicked(widget)">
+      <div class="tool-card-body">
+        <div class="">
+          <h2 class="tool-card-title">{{widget.name}}</h2>
+          <p class="tool-card-description">{{widget.description}}</p>
+        </div>
+        <div class="tool-card-icon">
+          <mat-icon style="margin-right: 1px; font-size: 26px; height: 25px;">{{widget.icon}}</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Tool Cards End -->

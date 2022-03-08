@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatBottomSheetRef} from "@angular/material/bottom-sheet";
 
 @Component({
   selector: 'app-info-dialog',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _bottomSheetRef: MatBottomSheetRef<InfoDialogComponent>) { }
 
   ngOnInit(): void {
+  }
+
+  closeBottomSheet = (event: MouseEvent):void => {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
   }
 
 }

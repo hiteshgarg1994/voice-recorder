@@ -1,58 +1,48 @@
-﻿
-<!-- Header Start -->
-
-<mat-toolbar class="head-search-bar">
-    <button mat-icon-button class="head-search-icon-button" aria-label="Example icon-button with menu icon" mat-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
+﻿<mat-toolbar class="head-search-bar">
+  <button mat-icon-button class="head-search-icon-button" aria-label="Example icon-button with menu icon" mat-button
+          (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h5>&nbsp;&nbsp; {{data_service?.current_tool}}</h5>
+  <span style="flex: 1 1 auto;"></span>
+  <form class="head-search-form">
+    <div class="head-search-icon">
+      <mat-icon>search</mat-icon>
+    </div>
+    <input class="head-search-box-input" type="text" placeholder="Search for anything">
+  </form>
+  <img mat-button [matMenuTriggerFor]="menu" src="assets/images/06.png" class="head-user-img">
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item class="headmenudd">
+      <mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">person</mat-icon>
+      Profile
     </button>
-    <h5>Tools | Voice Recorder</h5>
-    <span style="flex: 1 1 auto;"></span>
-    <form class="head-search-form">
-                <div class="head-search-icon"><mat-icon>search</mat-icon></div>
-                <input class="head-search-box-input" type="text" placeholder="Search for anything">
-             </form>
-    <img mat-button [matMenuTriggerFor]="menu" src="assets/images/06.png" class="head-user-img">
-<mat-menu #menu="matMenu" >
-  <button mat-menu-item class="headmenudd"> <mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">person</mat-icon>Profile</button>
-  <button mat-menu-item class="headmenudd"><mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">settings</mat-icon> setting</button>
-  <hr>
-  <button mat-menu-item class="headmenudd"><mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">settings</mat-icon>Logout</button>
-</mat-menu>
-  </mat-toolbar>
- <!-- Header End -->
+    <button mat-menu-item class="headmenudd">
+      <mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">settings</mat-icon>
+      setting
+    </button>
+    <hr>
+    <button mat-menu-item class="headmenudd">
+      <mat-icon style="margin-right: 2px; font-size: 14px; height: 14px;">settings</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
 
-<!-- Sidebar Start -->
-  <mat-drawer-container class="dashboard-sidebar-container" >
-    <mat-drawer #drawer class="dashboard-sidenav" mode="side" opened>
-        <button mat-menu-item class="menusb"> <mat-icon style="margin-right: 16px; font-size: 26px; height: 31px;">business_center</mat-icon>Tools</button>
-    </mat-drawer>
-<!-- Sidebar End -->
+<mat-drawer-container class="dashboard-sidebar-container">
+  <mat-drawer #drawer class="dashboard-sidenav" mode="side" opened>
+    <button routerLink="/analysis" routerLinkActive="active" mat-menu-item class="menusb left-menu-button">
+      <mat-icon style="margin-right: 16px; font-size: 26px; height: 31px;">analytics</mat-icon>
+      Analysis
+    </button>
+    <button routerLink="/dashboard" routerLinkActive="active" mat-menu-item class="menusb left-menu-button">
+      <mat-icon style="margin-right: 16px; font-size: 26px; height: 31px;">construction</mat-icon>
+      Tools
+      <span routerLink="/voice-recorder" [hidden]="true"></span>
+      <span routerLink="/qr-code" [hidden]="true"></span>
+    </button>
+  </mat-drawer>
 
   <router-outlet></router-outlet>
-
-<!-- Tool Cards Start -->
-
-<div class="tool-row-cols-xxl-4">
-<div class="tool-col">
-    <div class="tool-card">
-      <div class="tool-card-body">
-          <div class="">
-            <h2 class="tool-card-title">Voice recorder</h2>
-            <p class="tool-card-description">Asynchronous voice communication</p>
-         <div class="tool-card-button">
-            <button mat-raised-button>Click here</button>
-         </div>
-          </div>
-          <div class="tool-card-icon">
-            <mat-icon style="margin-right: 1px; font-size: 26px; height: 25px;">mic</mat-icon>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Tool Cards End -->
-
 
 </mat-drawer-container>

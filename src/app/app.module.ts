@@ -21,6 +21,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { AnalysisComponent } from './analysis/analysis.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { LoginComponent } from './layouts/public/login/login.component';
+import { ForgotPasswordComponent } from './layouts/public/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './layouts/public/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -33,7 +38,11 @@ import {MatMenuModule} from '@angular/material/menu';
     NotFoundComponent,
     publicComponent,
     secureComponent,
-    ViewVoiceComponent
+    ViewVoiceComponent,
+    AnalysisComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
+    MatBottomSheetModule
   ],
   providers: [],
   entryComponents: [InfoDialogComponent],

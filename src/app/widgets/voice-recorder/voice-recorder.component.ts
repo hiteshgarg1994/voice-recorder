@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {InfoDialogComponent} from "../../info-dialog/info-dialog.component";
 import {environment} from "../../../environments/environment";
 import { NgxSpinnerService } from "ngx-spinner";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
 
 @Component({
   selector: 'app-voice-recorder',
@@ -13,6 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 
 export class VoiceRecorderComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<string>();
   private recorder: MediaRecorder | undefined;
   private audio_stream: MediaStream | undefined;
   private preview: HTMLAudioElement | undefined;
@@ -26,12 +28,14 @@ export class VoiceRecorderComponent implements OnInit {
               private cd: ChangeDetectorRef,
               private fb: FormBuilder,
               private matDialog: MatDialog,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private _bottomSheet: MatBottomSheet) {
   }
 
   ngOnInit() {
     this.loadAudioRecorder();
     this.initAudioDescriptionForm();
+    this.newItemEvent.emit("bho")
   }
 
   initAudioDescriptionForm = (): void => {
@@ -104,6 +108,7 @@ export class VoiceRecorderComponent implements OnInit {
     this.spinner.show();
     this.http.post(environment.voiceApi, fd)
       .subscribe((response: any) => {
+        debugger
         if (response.ResponseCode == 200) {
           this.fileName = response.data.fileName;
           const base = window.location.origin;
@@ -131,8 +136,9 @@ export class VoiceRecorderComponent implements OnInit {
   }
 
   openDialog = (): void => {
-    const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(InfoDialogComponent, dialogConfig);
+    this._bottomSheet.open(InfoDialogComponent);
+    // const dialogConfig = new MatDialogConfig();
+    // this.matDialog.open(InfoDialogComponent, dialogConfig);
   }
 
 }

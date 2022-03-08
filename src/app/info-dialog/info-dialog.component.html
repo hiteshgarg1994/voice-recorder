@@ -1,36 +1,36 @@
-<mat-dialog-content>
-  <mat-icon style="position: relative; float: right;color:#000; top: 5px; right: 10px; cursor: pointer;" mat-dialog-close>close</mat-icon>
-  <div style=" width: 90%; background-color: #ffffff; border-radius: 10px;">
-    <div class="card radius-10">
-      <div class="row g-0">
-        <div class="col-xl-12"style="padding: 13px !important;">
-          <H3 class="step-heading">How to use?</H3>
-          <div class="step-1A">
-            <h4>Step 1 &#45; Press the Record Button</h4>
-            <p>Click on the "Start Recording" button.</p>
-          </div>
-          <div class="step-2A">
-            <h4>Step 2 &#45; Allow Microphone Access &amp; Start Talking</h4>
-            <p>A popup will appear, asking you permission for our website to access your microphone. Click on "Allow"
-              to start recording. Speak clearly into your microphone for up to 5 minutes.</p>
-          </div>
-          <div class="step-3A">
-            <h4>Step 3 &#45; Stop Recording</h4>
-            <p>Recording will automatically stop when you reach the duration limit, or you can stop it anytime by
-              clicking on the "Stop" button.</p>
-          </div>
-          <div class="step-4A">
-            <h4>Step 4 &#45; Preview your Recording or Try Again</h4>
-            <p>Once you finish recording, an audio player will appear. Press the play button to preview your
-              recording, or click "Redo Recording" to try again.</p>
-          </div>
-          <div class="step-5A">
-            <h4>Step 5 &#45; Share Your Audio Recording</h4>
-            <p>If you are happy with your final recording, share your audio URL.</p>
-          </div>
+<mat-icon style="position: relative; float: right;color:#000; top: 5px; right: 10px; cursor: pointer;" (click)="closeBottomSheet($event)">
+  close
+</mat-icon>
+<div style=" width: 90%; background-color: #ffffff; border-radius: 10px;">
+  <div class="card radius-10">
+    <div class="row g-0">
+      <div class="col-xl-12" style="padding: 13px !important;">
+        <h2 class="step-heading">How to use?</h2>
+        <div class="step-1A">
+          <span>Step 1 &#45; Press the Record Button</span>
+          <p>Click on the "Start Recording" button.</p>
+        </div>
+        <div class="step-2A">
+          <span>Step 2 &#45; Allow Microphone Access &amp; Start Talking</span>
+          <p>A popup will appear, asking you permission for our website to access your microphone. Click on "Allow"
+            to start recording. Speak clearly into your microphone for up to 5 minutes.</p>
+        </div>
+        <div class="step-3A">
+          <span>Step 3 &#45; Stop Recording</span>
+          <p>Recording will automatically stop when you reach the duration limit, or you can stop it anytime by
+            clicking on the "Stop" button.</p>
+        </div>
+        <div class="step-4A">
+          <span>Step 4 &#45; Preview your Recording or Try Again</span>
+          <p>Once you finish recording, an audio player will appear. Press the play button to preview your
+            recording, or click "Redo Recording" to try again.</p>
+        </div>
+        <div class="step-5A">
+          <span>Step 5 &#45; Share Your Audio Recording</span>
+          <p>If you are happy with your final recording, share your audio URL.</p>
         </div>
       </div>
     </div>
   </div>
-</mat-dialog-content>
+</div>
 
