@@ -1,0 +1,69 @@
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <!--    <button class="link-cursor" mat-icon-button (click)="snav.toggle();focusTextArea()">-->
+    <!--      <mat-icon>menu</mat-icon>-->
+    <!--    </button>-->
+    <h1 class="example-app-name">My Notes</h1>
+    <span class="example-spacer"></span>
+    <div class="search-input-parent">
+      <input [disabled]="!fillerNav?.length" [(ngModel)]="filterQuery" class="search-input" placeholder="Search"
+             matInput/>
+      <i (click)="filterQuery = ''" *ngIf="filterQuery" class="material-icons link-cursor">
+        cancel
+      </i>
+    </div>
+    <mat-icon
+              [style.color]="fillerNav?.length ? '#fff' : 'grey'"
+              (click)="fillerNav?.length ? startSpeech(): ''" class="example-icon link-cursor"
+              [class.link-cursor]="fillerNav?.length"
+              aria-hidden="false">{{listening ? 'mic' : 'mic_off'}}</mat-icon>
+    <mat-icon [style.color]="!fillerNav?.length || fillerNav[activeIndex]?.content ? '#fff' : 'grey'"
+              (click)="!fillerNav?.length || fillerNav[activeIndex]?.content ? addNote() : '';"
+              [class.link-cursor]="!fillerNav?.length || fillerNav[activeIndex]?.content"
+              class="example-icon link-cursor" aria-hidden="false">note_add
+    </mat-icon>
+    <mat-icon [style.color]="fillerNav?.length ? '#fff' : 'grey'"
+              (click)="fillerNav?.length ? deleteNote() : ''"
+              [class.link-cursor]="fillerNav?.length"
+              class="example-icon"
+              aria-hidden="false">delete
+    </mat-icon>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav [opened]="mobileQuery.matches ? false : true" #snav [mode]="'side'">
+      <mat-nav-list>
+        <a [style.background]="activeIndex === i ? '#ffffc9' : '#ffffff'" (click)="editNote(i)" mat-list-item
+           *ngFor="let nav of fillerNav | hightlight : filterQuery;trackBy: trackByFn;let i=index">
+          <h4 mat-line [innerHTML]="nav.title | hightlightTxt : filterQuery"></h4>
+          <p mat-line><span>{{(nav?.time | date : 'shortDate') + ' '}}</span>
+            <span class="color-darkgrey" mat-line [innerHTML]="nav.navContent | hightlightTxt : filterQuery"></span>
+          </p>
+          <mat-divider></mat-divider>
+        </a>
+        <span class="padding-30"
+              *ngIf="!(fillerNav | hightlight : filterQuery).length && filterQuery">
+          <span>No results found</span>
+<br>
+          <span class="color-darkgrey font-size-11">  (Clear search to get all notes)</span>
+
+        </span>
+        <span class="padding-30" *ngIf="!fillerNav.length && !filterQuery">
+          <span>No notes found</span>
+          <br>
+          <span class="color-darkgrey font-size-11">  (Add a note by clicking add icon)</span>
+
+        </span>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="side-content">
+        <span *ngIf="fillerNav[activeIndex]?.time"
+              class="time-stamp">{{(fillerNav[activeIndex]?.time | date : 'medium') + ' '}}</span>
+        <span class="words words-active" id="words"></span>
+        <textarea (ngModelChange)="textAreaValueChange($event)" [disabled]="!fillerNav?.length" #textArea
+                  [(ngModel)]="(fillerNav[activeIndex] || {})['content']"
+                  autofocus matInput></textarea>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

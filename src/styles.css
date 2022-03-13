@@ -75,7 +75,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* CSS for Dashboard Sidebar */
 
 .mat-drawer-inner-container{width: 210px !important;}
-.mat-drawer-container{min-height: 91%;}
 .menusb{font-size: 15px; line-height: 36px; height: 36px; margin-left: 12px; }
 @media only screen and (max-width: 600px) {
     .mat-drawer-inner-container{width: 130px !important;}
@@ -153,4 +152,8 @@ button.left-menu-button {
 
 .left-menu-button.active {
   background: #efefef;
+}
+
+.mat-drawer-container {
+  height: 100%;
 }

@@ -10,7 +10,8 @@ export class DataService {
     "/dashboard": "Dashboard",
     "/analysis": "Analysis",
     "/voice-recorder": "Tools | Voice Recorder",
-    "/qr-code": "Tools | QR Code"
+    "/qr-code": "Tools | QR Code",
+    "/speech-voice": "Tools | Memo",
   }
 
   constructor(private router: Router) {

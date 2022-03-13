@@ -8,6 +8,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {VoiceRecorderComponent} from "./widgets/voice-recorder/voice-recorder.component";
 import {QrCodeComponent} from "./widgets/qr-code/qr-code.component";
 import {AnalysisComponent} from "./analysis/analysis.component";
+import {SpeechToTextComponent} from "./widgets/speech-to-text/speech-to-text.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: 'analysis', component: AnalysisComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'voice-recorder', component: VoiceRecorderComponent },
-      { path: 'qr-code', component: QrCodeComponent }
+      { path: 'qr-code', component: QrCodeComponent },
+      { path: 'speech-voice', component: SpeechToTextComponent }
     ]
   },
   { path: '**', component: NotFoundComponent } // Wildcard route

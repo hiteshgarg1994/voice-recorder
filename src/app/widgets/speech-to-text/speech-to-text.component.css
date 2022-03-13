@@ -1,0 +1,151 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-icon {
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.time-stamp {
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0 0px 0px;
+  color: #8b7878;
+  background: rgb(255, 255, 201)
+}
+
+.side-content {
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-content {
+  background: #ffffff
+}
+
+.side-content textarea, .side-content textarea:focus {
+  height: 80%;
+  width: 95%;
+  border: none;
+  resize: none;
+  position: absolute;
+  top: 55px;
+  left: 20px;
+  outline: none;
+  background: #fff;
+  font-size: 16px;
+}
+
+.search-input {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+
+.link-cursor {
+  cursor: pointer;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+h4 {
+  font-weight: bold !important;
+  margin-bottom: 10px !important;
+}
+
+.search-input-parent {
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.search-input-parent i {
+  position: absolute;
+  right: 2px;
+  top: 8px;
+  color: #ec632e;
+  font-size: 21px;
+}
+
+.color-darkgrey {
+  color: darkgrey;
+}
+
+.padding-30 {
+  position: absolute;
+  left: 14%;
+  top: 50%;
+}
+
+.font-size-11 {
+  font-size: 11px;
+}
+
+@media screen and (max-width: 600px) {
+  .example-icon {
+    padding: 0 5px;
+  }
+
+  .example-app-name {
+    display: none
+  }
+
+  .search-input-parent input {
+    padding-right: 15px
+  }
+
+  mat-sidenav {
+    width: 150px;
+  }
+}
+
+.mat-drawer-content {
+  overflow: hidden;
+}
+
+.words {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.words-active {
+  background: rgb(255, 255, 201);
+  padding: 5px 0 0px 0px;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 35px;
+}
+
+.mat-toolbar.mat-primary {
+background: #ec632e;
+}

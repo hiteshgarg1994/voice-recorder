@@ -26,6 +26,9 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { LoginComponent } from './layouts/public/login/login.component';
 import { ForgotPasswordComponent } from './layouts/public/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './layouts/public/reset-password/reset-password.component';
+import { SpeechToTextComponent } from './widgets/speech-to-text/speech-to-text.component';
+import {HightlightPipe, HightlightSearchPipe} from "./common/highlight.pipe";
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { ResetPasswordComponent } from './layouts/public/reset-password/reset-pa
     AnalysisComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SpeechToTextComponent,
+    HightlightPipe,
+    HightlightSearchPipe
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,8 @@ import { ResetPasswordComponent } from './layouts/public/reset-password/reset-pa
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatListModule
   ],
   providers: [],
   entryComponents: [InfoDialogComponent],

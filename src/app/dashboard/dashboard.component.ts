@@ -21,6 +21,12 @@ export class DashboardComponent {
       "description": "Scan & Contact",
       "icon": "qr_code_2",
       "route": "/qr-code"
+    },
+    {
+      "name": "Memo",
+      "description": "Store notes by typing/speech",
+      "icon": "speaker_notes",
+      "route": "/speech-voice"
     }]
 
   widgetClicked = (widget: any): void => {
